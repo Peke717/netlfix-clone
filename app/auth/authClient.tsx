@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react';
 
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
+import Image from 'next/image';
 
 const Client = () => {
 	const [email, setEmail] = useState('');
@@ -51,7 +52,7 @@ const Client = () => {
 			<div className="bg-black w-full h-full md:bg-opacity-50">
 				<nav className="px-4 py-4 md:px-12 md:py-6">
 					{/* logo大小RWD  登入註冊框RWD 再來用資料庫*/}
-					<img src="/images/logo.png" alt="logo" className="h-10 sm:h-12 " />
+					<Image src="/images/logo.png" alt="logo" className="h-10 sm:h-12 " />
 					<div className="flex justify-center mt-5">
 						<div className="bg-black bg-opacity-75 px-[5%] pt-5 pb-7 md:p-16 md:pb-10 md:max-w-md rounded-md w-full">
 							<h2 className="text-white text-4xl mb-8 font-semibold">

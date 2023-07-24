@@ -5,6 +5,7 @@ import { BsFillPlayFill } from 'react-icons/bs';
 import { BiChevronDown } from 'react-icons/bi';
 import FavoriteButton from './FavoriteButton';
 import useInfoModal from '@/hooks/useInfoModal';
+import Image from 'next/image';
 
 interface MovieCardProps {
 	data: Record<string, any>;
@@ -16,7 +17,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 
 	return (
 		<div className="group bg-zinc-900  relative h-[12vw]">
-			<img
+			<Image
 				src={data.thumbnailUrl}
 				alt="Thumbnail"
 				className="
@@ -51,7 +52,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           group-hover:opacity-100
         "
 			>
-				<img
+				<Image
 					className="
             cursor-pointer
             object-cover
