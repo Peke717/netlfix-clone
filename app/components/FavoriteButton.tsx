@@ -45,8 +45,8 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
 			className="
         cursor-pointer
         group/item
-        w-6 lg:w-10
-        h-6 lg:h-10
+        w-4 lg:w-7
+				h-4 lg:h-7
         border-neutral-300
         border-2
         rounded-full

@@ -5,6 +5,7 @@ import PlayButton from './playButton';
 import FavoriteButton from './FavoriteButton';
 import useInfoModal from '@/hooks/useInfoModal';
 import useMovie from '@/hooks/useMovie';
+import { useRouter } from 'next/navigation';
 
 interface InfoModalProps {
 	visible?: boolean;
@@ -16,6 +17,13 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 
 	const { movieId } = useInfoModal();
 	const { data = {} } = useMovie(movieId);
+
+	const router = useRouter();
+
+	const redirectToWatch = useCallback(
+		() => router.push(`/watch/${data.id}`),
+		[router, data.id]
+	);
 
 	useEffect(() => {
 		setIsvisible(!!visible);
@@ -35,56 +43,53 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 	return (
 		<div
 			className="
-        z-50
-        transition
-        duration-300
-        bg-black
-        bg-opacity-80
+        z-30
         flex justify-center items-center
-        overflow-x-hidden overflow-y-auto
-        fixed inset-0
+        box-border
+				absolute
+				top-0 left-0
+				h-full w-full
       "
 		>
 			<div
-				className="
-          relative
-          w-auto
-          mx-auto
-          max-w-3xl
+				className="w-[435px] lg:w-[850px] origin-[50%_12.5%] left-auto
+					top-[2em]
+					mb-[2em]
+					absolute
           rounded-md
           overflow-hidden
         "
 			>
 				<div
-					className={`
-            ${isVisible ? 'scale-100' : 'scale-0'}
+					className={`${isVisible ? 'scale-100' : 'scale-50'}
             transform
             duration-300
             relative
-            flex-auto
-            bg-zinc-900
-            drop-shadow-md  
-          `}
+            drop-shadow-md
+						
+					`}
 				>
-					<div className="relative h-96">
+					<div className="relative h-96 ">
 						<video
+							onClick={redirectToWatch}
 							className="
-                w-full h-full
-                brightness-[60%]
-                object-cover
+							w-full h-full
+							bg-transparent
+              object-cover
+							cursor-pointer
               "
 							autoPlay
 							muted
-							loop
 							poster={data?.thumbnailUrl}
 							src={data?.videoUrl}
 						></video>
 						<div
-							className="
+							className=" active:ring-2 active:ring-white
                 cursor-pointer
                 absolute top-3 right-3
                 h-10 w-10
                 rounded-full
+
                 bg-black bg-opacity-70
                 flex items-center justify-center
               "
@@ -104,8 +109,10 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
 						</div>
 					</div>
 
-					<div className="px-12 py-8">
-						<p className="text-green-400 font-semibold text-lg">新</p>
+					<div className="px-12 py-8 bg-zinc-900">
+						<p className="text-green-400 font-semibold text-lg">
+							{data?.new ? '新' : ''}
+						</p>
 						<p className="text-white">{data?.duration}</p>
 						<p className="text-white">{data?.genre}</p>
 						<p className="text-white">{data?.description}</p>

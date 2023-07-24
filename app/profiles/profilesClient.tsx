@@ -1,7 +1,6 @@
 'use client';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 const Client = () => {
 	const router = useRouter();
@@ -30,7 +29,7 @@ const Client = () => {
                 overflow-hidden
               "
 							>
-								<Image src="/images/default-blue.png" alt="Profile" />
+								<img src="/images/default-blue.png" alt="Profile" />
 							</div>
 							<div
 								className="

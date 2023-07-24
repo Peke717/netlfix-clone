@@ -3,7 +3,6 @@ import { BsChevronDown, BsSearch, BsBell } from 'react-icons/bs';
 import MobileMenu from './MobileMenu';
 import NavbarItem from './NavbarItem';
 import AccountMenu from './AccountMenu';
-import Image from 'next/image';
 
 const TOP_OFFSET = 66;
 
@@ -28,21 +27,38 @@ const Navbar = () => {
 		};
 	}, []);
 
-	const toggleMobileMenu = useCallback(() => {
-		setShowMobileMenu(current => !current);
+	const enableMobileMenu = useCallback(() => {
+		setShowMobileMenu(true);
+		setShowAccountMenu(false);
+	}, []);
+	const disableMobileMenu = useCallback(() => {
+		setShowMobileMenu(false);
 	}, []);
 
-	const toggleAccountMenu = useCallback(() => {
-		setShowAccountMenu(current => !current);
+	const enableAccountMenu = useCallback(() => {
+		setShowAccountMenu(true);
+		setShowMobileMenu(false);
+	}, []);
+
+	const disableAccountMenu = useCallback(() => {
+		setShowAccountMenu(false);
+	}, []);
+
+	const disableAllMenu = useCallback(() => {
+		setShowAccountMenu(false);
+		setShowMobileMenu(false);
 	}, []);
 
 	return (
-		<nav className="w-full fixed z-40">
+		<nav
+			onMouseLeave={disableAllMenu}
+			className="w-full h-auto min-h-[70px] fixed top-0 z-30"
+		>
 			<div
 				className={`
-					px-4
-					md:px-16
-					py-6
+
+					h-[41px] lg:h-[68px]
+					px-[4%]
 					flex
 					flex-row
 					items-center
@@ -52,7 +68,7 @@ const Navbar = () => {
 					${showBackground ? 'bg-zinc-900' : ''}
 				`}
 			>
-				<Image className="h-4 lg:h-7" src="/images/logo.png" alt="logo" />
+				<img className="h-3 md:h-4 lg:h-7" src="/images/logo.png" alt="logo" />
 				<div
 					className="
 					flex-row
@@ -70,7 +86,7 @@ const Navbar = () => {
 					<NavbarItem label="按照語言瀏覽" />
 				</div>
 				<div
-					onClick={toggleMobileMenu}
+					onMouseEnter={enableMobileMenu}
 					className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
 				>
 					<p className="text-white text-sm">瀏覽</p>
@@ -79,7 +95,9 @@ const Navbar = () => {
 							showMobileMenu ? 'rotate-180' : 'rotate-0'
 						}`}
 					/>
-					<MobileMenu visible={showMobileMenu} />
+					<div onMouseLeave={disableMobileMenu}>
+						<MobileMenu visible={showMobileMenu} />
+					</div>
 				</div>
 				<div className="flex flex-row ml-auto gap-7 items-center">
 					<div className="text-gray-200 hover:text-gray-300 cursor-pointer">
@@ -90,18 +108,23 @@ const Navbar = () => {
 					</div>
 
 					<div
-						onClick={toggleAccountMenu}
-						className="group flex flex-row items-center gap-2 cursor-pointer relative"
+						onMouseEnter={enableAccountMenu}
+						className="group flex flex-row items-center gap-2 cursor-pointer relative transition"
 					>
 						<div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
-							<Image src="/images/default-blue.png" alt="" />
+							<img src="/images/default-blue.png" alt="" />
 						</div>
 						<BsChevronDown
 							className={`text-white transition ${
 								showAccountMenu ? 'rotate-180' : 'rotate-0'
 							}`}
 						/>
-						<AccountMenu visible={showAccountMenu} />
+						<div
+							onMouseLeave={disableAccountMenu}
+							onMouseEnter={enableAccountMenu}
+						>
+							<AccountMenu visible={showAccountMenu} />
+						</div>
 					</div>
 				</div>
 			</div>

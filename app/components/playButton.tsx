@@ -12,13 +12,15 @@ const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
 		<button
 			onClick={() => router.push(`/watch/${movieId}`)}
 			className="
+      focus:ring-1 focus:ring-white 
+      focus:ring-offset-transparent focus:ring-offset-1
+      active:bg-opacity-60  
       bg-white
       rounded-md
       py-1 md:py-2
       px-2 md:px-4
       w-auto
-      text-xs lg:text-lg
-      font-semibold
+      text-xs md:text-base lg:text-lg
       flex flex-row items-center
       hover:bg-neutral-300 
       hover:opacity-80

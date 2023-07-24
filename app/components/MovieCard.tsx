@@ -5,18 +5,10 @@ import { BsFillPlayFill } from 'react-icons/bs';
 import { BiChevronDown } from 'react-icons/bi';
 import FavoriteButton from './FavoriteButton';
 import useInfoModal from '@/hooks/useInfoModal';
-import Image from 'next/image';
+import { MovieInterface } from '@/types/movie';
 
 interface MovieCardProps {
-	data: {
-		id: string;
-		title: string;
-		description: string;
-		thumbnailUrl: string;
-		videoUrl: string;
-		duration: string;
-		genre: string;
-	};
+	data: MovieInterface;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
@@ -28,78 +20,73 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 		[router, data.id]
 	);
 
+	// problem ##當hover圖片時，右半側的圖會被右邊的左側覆蓋
 	return (
-		<div className="group bg-zinc-900  relative h-[12vw]">
-			<Image
+		<div className="group relative bg-transparent ">
+			<img
 				onClick={redirectToWatch}
 				src={data.thumbnailUrl}
 				alt="Thumbnail"
-				className="
-          cursor-pointer
+				className=" 
+          duration-300
+          delay-300
           object-cover
+          cursor-pointer
           transition
-          duration
           shadow-xl
+          opacity-100
           group-hover:opacity-0
           rounded-md
-          delay-300
-          w-full
-          h-[12vw]
+          w-full h-[8vw]
         "
 			/>
 			<div
 				className="
-          opacity-0
           absolute
           top-0
-          left-0
           transition
-          duration-200
-          z-10
-          invisible
-          delay-300
+          duration-300 
           w-full
-          group-hover:visible
-          group-hover:scale-110
-          group-hover:-translate-y-[6vw]
-          group-hover:translate-x-[2vw]
-          group-hover:opacity-100
+          group-hover:scale-150
+          group-hover:z-40
+          group-hover:-translate-y-[4vw]
         "
 			>
-				<Image
+				<img
 					onClick={redirectToWatch}
-					className="
+					className=" 
             cursor-pointer
             object-cover
             transition
             duration
             shashow-xl
-            rounded-t-md
+            rounded-md
+            group-hover:rounded-b-none
             w-full
-            h-[12vw]
+            h-[8vw]
           "
 					src={data.thumbnailUrl}
 					alt="Thumbnail"
 				/>
 				<div
 					className="
-            z-10
             bg-zinc-800
-            p-2
-            lg:p-4
+            p-2 lg:p-4
             absolute
             w-full
             transition
             shashow-md
             rounded-b-md
+            invisible
+            group-hover:visible
           "
 				>
-					<div className="flex flex-row items-center gap-3">
+					<div className="flex flex-row items-center gap-2">
 						<div
 							className="
                 cursor-pointer
-                w-6 lg:w-10
-                h-6 lg:h-10
+                w-4 h-4
+                lg:w-7 lg:h-7
                 bg-white
                 rounded-full
                 flex
@@ -119,8 +106,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
               cursor-pointer
               ml-auto
               group/item
-              w-6 lg:w-10
-              h-6 lg:h-10
+              w-4 lg:w-7
+              h-4 lg:h-7
               border-white
               border-2
               rounded-full
@@ -135,16 +122,21 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 							/>
 						</div>
 					</div>
-					<p className="text-green-400 font-semibold mt-4">
-						新 <span className="text-white">2023</span>
-					</p>
+					<div className="text-green-400 font-semibold text-sm  mt-2 lg:mt-4">
+						{data?.new ? '新' : ''}{' '}
+						<span className="text-white flex flex-row gap-3 font-normal text-xs">
+							<p>2023</p>
+							<p>{data.duration}</p>
+							<p>{data.genre}</p>
+						</span>
+					</div>
 
-					<div className="flex flex-row mt-4 gap-2 items-center">
-						<p className="text-white text-[10px] lg:text-sm">{data.duration}</p>
+					{/* <div className="flex flex-row mt-2 lg:mt-4 gap-2 items-center">
+						<p className="text-white text-[10px] ">{data.duration}</p>
 					</div>
-					<div className="flex flex-row mt-4 gap-2 items-center">
-						<p className="text-white text-[8px] lg:text-sm">{data.genre}</p>
-					</div>
+					<div className="flex flex-row mt-2 lg:mt-4 gap-2 items-center">
+						<p className="text-white text-[8px] ">{data.genre}</p>
+					</div> */}
 				</div>
 			</div>
 		</div>
