@@ -7,9 +7,7 @@ import serverAuth from '@/lib/serverAuth';
 export async function POST(req: Request) {
 	const { currentUser } = await serverAuth();
 
-	const { movieId } = (await req.json()) as {
-		movieId: string;
-	};
+	const { movieId } = await req.json();
 
 	const exisitingMovie = await prismadb.movie.findUnique({
 		where: {
