@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { BsFillPlayFill } from 'react-icons/bs';
@@ -8,16 +8,30 @@ import useInfoModal from '@/hooks/useInfoModal';
 import Image from 'next/image';
 
 interface MovieCardProps {
-	data: Record<string, any>;
+	data: {
+		id: string;
+		title: string;
+		description: string;
+		thumbnailUrl: string;
+		videoUrl: string;
+		duration: string;
+		genre: string;
+	};
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 	const router = useRouter();
 	const { openModal } = useInfoModal();
 
+	const redirectToWatch = useCallback(
+		() => router.push(`/watch/${data.id}`),
+		[router, data.id]
+	);
+
 	return (
 		<div className="group bg-zinc-900  relative h-[12vw]">
 			<Image
+				onClick={redirectToWatch}
 				src={data.thumbnailUrl}
 				alt="Thumbnail"
 				className="
@@ -53,6 +67,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         "
 			>
 				<Image
+					onClick={redirectToWatch}
 					className="
             cursor-pointer
             object-cover
@@ -93,7 +108,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
                 transition
                 hover:bg-neutral-300
               "
-							onClick={() => router.push(`/watch/${data?.id}`)}
+							onClick={redirectToWatch}
 						>
 							<BsFillPlayFill size={20} />
 						</div>
@@ -121,7 +136,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 						</div>
 					</div>
 					<p className="text-green-400 font-semibold mt-4">
-						New <span className="text-white">2023</span>
+						新 <span className="text-white">2023</span>
 					</p>
 
 					<div className="flex flex-row mt-4 gap-2 items-center">
