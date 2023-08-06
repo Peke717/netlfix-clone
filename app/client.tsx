@@ -19,7 +19,7 @@ export default function Client(this: any) {
 		if (isOpen === true) {
 			const bdElement = document.querySelector('.bd');
 			const bdRect = bdElement?.getBoundingClientRect();
-			const bdTop = -bdRect?.top;
+			const bdTop = -bdRect!.top;
 			console.log('T:', bdTop);
 			// bdElement.style.top = -bdTop;
 			setTop(bdTop);
