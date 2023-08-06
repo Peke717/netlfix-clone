@@ -4,19 +4,8 @@ import MovieCard from './MovieCard';
 import { MovieInterface } from '@/types/movie';
 
 interface MovieListProps {
-<<<<<<< HEAD
 	data: MovieInterface[];
-=======
-	data: {
-		id: string;
-		title: string;
-		description: string;
-		thumbnailUrl: string;
-		videoUrl: string;
-		duration: string;
-		genre: string;
-	}[];
->>>>>>> 9e829df6a17931706dd34f835955cb7344bb006e
+
 	title: string;
 }
 

@@ -5,10 +5,7 @@ import { BsFillPlayFill } from 'react-icons/bs';
 import { BiChevronDown } from 'react-icons/bi';
 import FavoriteButton from './FavoriteButton';
 import useInfoModal from '@/hooks/useInfoModal';
-<<<<<<< HEAD
 import { MovieInterface } from '@/types/movie';
-=======
->>>>>>> 9e829df6a17931706dd34f835955cb7344bb006e
 
 interface MovieCardProps {
 	data: MovieInterface;
@@ -25,11 +22,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 
 	// problem ##當hover圖片時，右半側的圖會被右邊的左側覆蓋
 	return (
-<<<<<<< HEAD
 		<div className="group relative bg-transparent ">
-=======
-		<div className="group bg-zinc-900  relative h-[12vw]">
->>>>>>> 9e829df6a17931706dd34f835955cb7344bb006e
 			<img
 				onClick={redirectToWatch}
 				src={data.thumbnailUrl}
