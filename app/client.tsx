@@ -25,9 +25,9 @@ export default function Client(this: any) {
 			setTop(bdTop);
 		}
 		window.scrollTo(0, top);
-		console.log('scroll:', top);
+		// console.log('scroll:', top);
 	}, [isOpen]);
-	console.log('isOpen:', isOpen);
+	// console.log('isOpen:', isOpen);
 
 	return (
 		<>
