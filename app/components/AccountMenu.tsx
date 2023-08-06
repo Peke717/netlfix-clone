@@ -1,6 +1,10 @@
 import React from 'react';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { signOut } from 'next-auth/react';
+<<<<<<< HEAD
+=======
+import React from 'react';
+>>>>>>> 9e829df6a17931706dd34f835955cb7344bb006e
 
 interface AccountMenuProps {
 	visible?: boolean;

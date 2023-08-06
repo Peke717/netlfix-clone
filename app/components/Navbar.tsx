@@ -68,7 +68,11 @@ const Navbar = () => {
 					${showBackground ? 'bg-zinc-900' : ''}
 				`}
 			>
+<<<<<<< HEAD
 				<img className="h-3 md:h-4 lg:h-7" src="/images/logo.png" alt="logo" />
+=======
+				<img className="h-4 lg:h-7" src="/images/logo.png" alt="logo" />
+>>>>>>> 9e829df6a17931706dd34f835955cb7344bb006e
 				<div
 					className="
 					flex-row
