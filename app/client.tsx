@@ -6,37 +6,35 @@ import useMovieList from '@/hooks/useMovieList';
 import useFavorites from '@/hooks/useFavorites';
 import InfoModal from './components/InfoModal';
 import useInfoModal from '@/hooks/useInfoModal';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 
 export default function Client(this: any) {
 	const { data: movies = [] } = useMovieList();
 	const { data: favorites = [] } = useFavorites();
 	const { isOpen, closeModal } = useInfoModal();
-	// problem position從fixed改為static畫面無法保持在原位，用了scrollTo      不同scrollY需要至少觸發一次才能讓bd的fixed.top保持在原位置
-	const [top, setTop] = useState(0);
+
+	//useRef 不會觸發組件重新渲染，它在更新時能夠立即反映最新的值。
+	//這裡不能用useState原因是setState會在render完才更新狀態(異步)，所以在讀取完state才會是上次的狀態
+	const topRef = useRef(0); // 使用 useRef 存儲 top 的即時值
 
 	useEffect(() => {
-		if (isOpen === true) {
-			const bdElement = document.querySelector('.bd');
-			const bdRect = bdElement?.getBoundingClientRect();
-			const bdTop = -bdRect!.top;
-			console.log('T:', bdTop);
-			// bdElement.style.top = -bdTop;
-			setTop(bdTop);
+		if (isOpen === false) {
+			window.scrollTo(0, Math.abs(topRef.current)); // 使用 topRef.current 獲取最新值
+		} else {
+			const bdElement = document.getElementById('bd');
+			const bdTop = bdElement!.getBoundingClientRect().top;
+			topRef.current = bdTop; // 更新 top 的即時值
 		}
-		window.scrollTo(0, top);
-		// console.log('scroll:', top);
 	}, [isOpen]);
-	// console.log('isOpen:', isOpen);
 
 	return (
 		<>
 			<div
-				className="bd"
+				id="bd"
 				style={
-					isOpen === true
-						? { position: 'fixed', top: -window.scrollY, overflow: 'visible' }
-						: { overflow: 'visible' }
+					isOpen
+						? { overflow: 'visible', position: 'fixed', top: -window.scrollY }
+						: { overflow: 'visible', position: 'static' }
 				}
 			>
 				<Navbar />
@@ -50,7 +48,6 @@ export default function Client(this: any) {
 				<InfoModal visible={isOpen} onClose={closeModal} />
 			</div>
 			<div
-				onClick={closeModal}
 				className={`${
 					!isOpen
 						? `invisible`

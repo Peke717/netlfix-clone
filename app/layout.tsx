@@ -3,7 +3,6 @@ import { NextAuthProvider } from './providers';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import useInfoModal from '@/hooks/useInfoModal';
 
 const inter = Inter({ subsets: ['latin'] });
 

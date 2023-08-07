@@ -37,7 +37,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           opacity-100
           group-hover:opacity-0
           rounded-md
-          w-full h-[8vw]
+          w-full h-[16vw] md:h-[11vw] lg:h-[9vw] xl:h-[8vw]
         "
 			/>
 			<div
@@ -49,7 +49,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           w-full
           group-hover:scale-150
           group-hover:z-40
-          group-hover:-translate-y-[4vw]
+          group-hover:-translate-y-[3vw]
         "
 			>
 				<img
@@ -63,13 +63,13 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             rounded-md
             group-hover:rounded-b-none
             w-full
-            h-[8vw]
+            h-[16vw] md:h-[11vw] lg:h-[9vw] xl:h-[8vw]
           "
 					src={data.thumbnailUrl}
 					alt="Thumbnail"
 				/>
 				<div
-					className="
+					className=" 
             bg-zinc-800
             p-2 lg:p-4
             absolute
@@ -77,8 +77,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             transition
             shashow-md
             rounded-b-md
-            invisible
-            group-hover:visible
+            hidden
+            group-hover:block
           "
 				>
 					<div className="flex flex-row items-center gap-2">
@@ -122,21 +122,17 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 							/>
 						</div>
 					</div>
-					<div className="text-green-400 font-semibold text-sm  mt-2 lg:mt-4">
+					<div className="text-green-400 font-semibold text-sm mt-[6px] lg:mt-2">
 						{data?.new ? '新' : ''}{' '}
-						<span className="text-white flex flex-row gap-3 font-normal text-xs">
-							<p>2023</p>
-							<p>{data.duration}</p>
-							<p>{data.genre}</p>
+						<span className="text-white flex flex-row font-normal text-xs">
+							2023
 						</span>
 					</div>
 
-					{/* <div className="flex flex-row mt-2 lg:mt-4 gap-2 items-center">
-						<p className="text-white text-[10px] ">{data.duration}</p>
+					<div className="flex flex-row mt-1 lg:mt-2 gap-2 items-center text-white text-xs ">
+						<p>{data.duration}</p>
+						<p>{data.genre}</p>
 					</div>
-					<div className="flex flex-row mt-2 lg:mt-4 gap-2 items-center">
-						<p className="text-white text-[8px] ">{data.genre}</p>
-					</div> */}
 				</div>
 			</div>
 		</div>
