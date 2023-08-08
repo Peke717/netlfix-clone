@@ -9,7 +9,7 @@ const Watch = () => {
 	const { movieId } = useParams();
 
 	const { data } = useMovie(movieId as string);
-	console.log(data);
+	// console.log(data);
 	return (
 		<div className="h-screen w-screen bg-black">
 			<nav

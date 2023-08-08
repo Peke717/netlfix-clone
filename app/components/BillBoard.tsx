@@ -18,6 +18,7 @@ const BillBoard = () => {
 				<div>
 					<video
 						className="object-cover bg-cover bg-[50%] w-[100%]"
+						// preload="auto"
 						// autoPlay
 						muted
 						poster={data?.thumbnailUrl}
@@ -37,16 +38,23 @@ const BillBoard = () => {
 					<div className=" bottom-[35%] flex flex-col justify-end left-[4%] absolute top-0 w-[36%] z-10">
 						<p
 							className="
-          text-white 
-          text-[4vw]
-          duration-300
-          font-bold
-          mb-[1.2vw]
-          "
+							text-white 
+							text-[4vw]
+							duration-300
+							font-bold
+							mb-[1.2vw]
+							"
 						>
 							{data?.title}
 						</p>
-						<p className="text-white text-[1.2vw] font-normal mt-[0.1vw] w-[100%]  drop-shadow-xl">
+						<p
+							style={{
+								display: '-webkit-box',
+								WebkitBoxOrient: 'vertical',
+								WebkitLineClamp: 4
+							}}
+							className="text-white text-[1.2vw] font-normal mt-[0.1vw] w-[100%]  drop-shadow-xl text-ellipsis overflow-hidden"
+						>
 							{data?.description}
 						</p>
 						<div className="flex flex-row relative whitespace-nowrap z-10  items-center mt-[1.5vw] gap-3">
