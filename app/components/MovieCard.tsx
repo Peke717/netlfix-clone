@@ -28,28 +28,28 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 				src={data.thumbnailUrl}
 				alt="Thumbnail"
 				className=" 
-          duration-300
-          delay-300
           object-cover
           cursor-pointer
           transition
           shadow-xl
-          opacity-100
-          group-hover:opacity-0
+					delay-300
           rounded-md
           w-full h-[16vw] md:h-[11vw] lg:h-[9vw] xl:h-[8vw]
         "
 			/>
 			<div
-				className="
+				className=" 
           absolute
           top-0
           transition
-          duration-300 
           w-full
+					opacity-0
+					duration-300
+					group-hover:delay-300
           group-hover:scale-150
           group-hover:z-40
-          group-hover:-translate-y-[3vw]
+          group-hover:-translate-y-[4vw]
+					group-hover:opacity-100
         "
 			>
 				<img
@@ -60,8 +60,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             transition
             duration
             shashow-xl
-            rounded-md
-            group-hover:rounded-b-none
+            rounded-t-md
             w-full
             h-[16vw] md:h-[11vw] lg:h-[9vw] xl:h-[8vw]
           "
@@ -69,7 +68,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 					alt="Thumbnail"
 				/>
 				<div
-					className=" 
+					className=" z-10
             bg-zinc-800
             p-2 lg:p-4
             absolute
@@ -77,8 +76,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             transition
             shashow-md
             rounded-b-md
+						duration-300
             hidden
-            group-hover:block
+						group-hover:block
           "
 				>
 					<div className="flex flex-row items-center gap-2">

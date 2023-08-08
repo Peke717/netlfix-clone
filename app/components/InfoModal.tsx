@@ -78,6 +78,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               object-cover
 							cursor-pointer
               "
+							preload="auto"
 							autoPlay
 							muted
 							poster={data?.thumbnailUrl}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface InputProps {
 	id: string;
@@ -10,6 +10,21 @@ interface InputProps {
 }
 
 const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
+	const typeMsg = (type?: string) => {
+		switch (type) {
+			case 'email':
+				return 'Please provide a valid email address.';
+			case 'text':
+				return '名稱已存在';
+			case 'password':
+				return 'Please provide a valid password.';
+			default:
+				return '';
+		}
+	};
+
+	const errMsg = typeMsg(type);
+
 	return (
 		<div className="relative">
 			<input
@@ -34,8 +49,11 @@ const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
         "
 				placeholder=" "
 			/>
+			<p className="mt-2 ml-2 hidden peer- peer-invalid:block text-pink-600 text-sm">
+				{errMsg}
+			</p>
 			<label
-				className="
+				className=" 
           absolute
           text-md
           text-zinc-400
@@ -50,7 +68,7 @@ const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
           peer-placeholder-shown:scale-100
           peer-placeholder-shown:translate-y-0
           peer-focus:scale-75  
-          peer-focus:-translate-y-3      
+          peer-focus:-translate-y-3    
         "
 				htmlFor={id}
 			>
